@@ -1,15 +1,18 @@
-let direction = 0
-basic.forever(function on_forever() {
-    
-    direction = input.compassHeading()
-    if (direction < 45 && direction > 0 || direction >= 315) {
+radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
+    if (receivedNumber == 0) {
         basic.showArrow(ArrowNames.North)
-    } else if (direction >= 45 && direction < 135) {
-        basic.showArrow(ArrowNames.East)
-    } else if (direction >= 135 && direction < 225) {
-        basic.showArrow(ArrowNames.South)
     } else {
-        basic.showArrow(ArrowNames.West)
+        basic.showArrow(ArrowNames.South)
     }
+    
+})
+input.onGesture(Gesture.LogoUp, function on_gesture_logo_up() {
+    radio.sendNumber(0)
+})
+input.onGesture(Gesture.LogoDown, function on_gesture_logo_down() {
+    radio.sendNumber(1)
+})
+radio.setGroup(1)
+basic.forever(function on_forever() {
     
 })

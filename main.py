@@ -1,14 +1,20 @@
-direction = 0
+def on_received_number(receivedNumber):
+    if receivedNumber == 0:
+        basic.show_arrow(ArrowNames.NORTH)
+    else:
+        basic.show_arrow(ArrowNames.SOUTH)
+radio.on_received_number(on_received_number)
+
+def on_gesture_logo_up():
+    radio.send_number(0)
+input.on_gesture(Gesture.LOGO_UP, on_gesture_logo_up)
+
+def on_gesture_logo_down():
+    radio.send_number(1)
+input.on_gesture(Gesture.LOGO_DOWN, on_gesture_logo_down)
+
+radio.set_group(1)
 
 def on_forever():
-    global direction
-    direction = input.compass_heading()
-    if direction < 45 and direction > 0 or direction >= 315:
-        basic.show_arrow(ArrowNames.NORTH)
-    elif direction >= 45 and direction < 135:
-        basic.show_arrow(ArrowNames.EAST)
-    elif direction >= 135 and direction < 225:
-        basic.show_arrow(ArrowNames.SOUTH)
-    else:
-        basic.show_arrow(ArrowNames.WEST)
+    pass
 basic.forever(on_forever)
