@@ -1,18 +1,23 @@
-radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
+radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 0) {
         basic.showArrow(ArrowNames.North)
     } else {
         basic.showArrow(ArrowNames.South)
     }
-    
+    basic.pause(100)
+    basic.clearScreen()
 })
-input.onGesture(Gesture.LogoUp, function on_gesture_logo_up() {
+input.onGesture(Gesture.LogoUp, function () {
     radio.sendNumber(0)
 })
-input.onGesture(Gesture.LogoDown, function on_gesture_logo_down() {
+input.onGesture(Gesture.LogoDown, function () {
     radio.sendNumber(1)
 })
 radio.setGroup(1)
-basic.forever(function on_forever() {
-    
+basic.forever(function () {
+    if (input.temperature() >= 30) {
+        led.plot(0, 0)
+    } else {
+        led.unplot(0, 0)
+    }
 })
