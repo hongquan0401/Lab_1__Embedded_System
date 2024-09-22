@@ -1,14 +1,29 @@
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 0) {
-        basic.showArrow(ArrowNames.North)
+        basic.showLeds(`
+            . . . . .
+            . . # # .
+            . # . . #
+            . # # # #
+            . # . . #
+            `)
     } else {
-        basic.showArrow(ArrowNames.South)
+        basic.showLeds(`
+            . . # # .
+            . . # . #
+            . . # # .
+            . . # . #
+            . . # # .
+            `)
     }
     basic.pause(100)
     basic.clearScreen()
 })
-input.onGesture(Gesture.LogoUp, function () {
+input.onButtonPressed(Button.A, function () {
     radio.sendNumber(0)
+})
+input.onButtonPressed(Button.B, function () {
+    radio.sendNumber(1)
 })
 input.onGesture(Gesture.LogoDown, function () {
     radio.sendNumber(1)
