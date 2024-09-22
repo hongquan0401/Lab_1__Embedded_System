@@ -1,4 +1,4 @@
-radio.onReceivedNumber(function (receivedNumber) {
+radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
     if (receivedNumber == 0) {
         basic.showLeds(`
             . . . . .
@@ -16,23 +16,22 @@ radio.onReceivedNumber(function (receivedNumber) {
             . . # # .
             `)
     }
+    
     basic.pause(100)
     basic.clearScreen()
 })
-input.onButtonPressed(Button.A, function () {
+input.onButtonPressed(Button.A, function on_button_pressed_a() {
     radio.sendNumber(0)
 })
-input.onButtonPressed(Button.B, function () {
-    radio.sendNumber(1)
-})
-input.onGesture(Gesture.LogoDown, function () {
+input.onButtonPressed(Button.B, function on_button_pressed_b() {
     radio.sendNumber(1)
 })
 radio.setGroup(1)
-basic.forever(function () {
+basic.forever(function on_forever() {
     if (input.temperature() >= 30) {
         led.plot(0, 0)
     } else {
         led.unplot(0, 0)
     }
+    
 })
